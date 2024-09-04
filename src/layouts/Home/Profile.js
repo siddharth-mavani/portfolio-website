@@ -10,7 +10,6 @@ import { Section } from 'components/Section';
 import { Text } from 'components/Text';
 import { Transition } from 'components/Transition';
 import { Fragment, useState } from 'react';
-import { media } from 'utils/style';
 import styles from './Profile.module.css';
 
 const mailtoURL = `mailto:siddharthamavani2003@gmail.com?subject=${""}&body=${"Hi Siddharth,"}`;
