@@ -32,7 +32,7 @@
   max-width: var(--maxWidthL);
   align-items: center;
   justify-content: center;
-  display: grid;
+  /* display: grid; */
   grid-template-columns: var(--textColumnWidth) 1fr;
   grid-column-gap: var(--space2XL);
 

@@ -77,7 +77,7 @@ export const Home = () => {
     <div className={styles.home}>
       <Meta
         title="Siddharth Mavani - Portfolio"
-        description="This is a portfolio created by using the template from Hamish Williams."
+        description="This is a portfolio created using next.js"
       />
       <Intro
         id="intro"
