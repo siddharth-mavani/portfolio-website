@@ -17,7 +17,7 @@ import Send from './svg/send.svg';
 import Twitter from './svg/twitter.svg';
 import Linkedin from './svg/linkedin.svg';
 import Leetcode from './svg/leetcode.svg';
-import mail from './svg/mail.svg'
+import mail from './svg/mail.svg';
 
 export const icons = {
   arrowLeft: ArrowLeft,
