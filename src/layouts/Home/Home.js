@@ -35,10 +35,12 @@ export const Home = () => {
   const projectSix = useRef();
   const projectSeven = useRef();
   const projectEight = useRef();
+  const projectNine = useRef();
+  const projectTen = useRef();
   const details = useRef();
 
   useEffect(() => {
-    const sections = [intro, projectOne, projectTwo, projectThree, projectFour,  projectFive, projectSix, projectSeven, projectEight, details];
+    const sections = [intro, projectOne, projectTwo, projectThree, projectFour,  projectFive, projectSix, projectSeven, projectEight, projectNine, projectTen, details];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -101,6 +103,31 @@ export const Home = () => {
           alignItems:'center'
         }}
       >
+        <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '200px', textAlign:'center'}}>
+        <ProjectSummary
+          id="project-10"
+          sectionRef={projectTen}
+          visible={visibleSections.includes(projectTen.current)}
+          index={10}
+          title="Part-of-Speech (PoS) Tagger"
+          description="A Bidirectional Long Short-Term Memory (Bi-LSTM) model to label each word in a sentence with its corresponding part of speech, such as noun, verb, etc."
+          buttonText="View project"
+          buttonLink="https://github.com/siddharth-mavani/PoS-Tagger"
+        />
+      </div>
+      <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '200px', textAlign:'center'}}>
+        <ProjectSummary
+          id="project-9"
+          sectionRef={projectNine}
+          visible={visibleSections.includes(projectNine.current)}
+          index={9}
+          title="Language Translation Model"
+          description="A sequence-to-sequence language translation model that translates sentences from Hungarian to English"
+          buttonText="View project"
+          buttonLink="https://github.com/siddharth-mavani/Python-Database-Management-System"
+        />
+      </div>
+
         <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '200px', textAlign:'center' }}>
           <ProjectSummary
             id="project-1"
@@ -142,8 +169,8 @@ export const Home = () => {
         <ProjectSummary
           id="project-4"
           sectionRef={projectFour}
-          visible={visibleSections.includes(projectThree.current)}
-          index={3}
+          visible={visibleSections.includes(projectFour.current)}
+          index={4}
           title="Multi-Dock"
           description="A Multi-Container application with React for the frontend, Node/Express.js for the backend, Postgres for the database, and Redis for caching."
           buttonText="View project"
@@ -154,8 +181,8 @@ export const Home = () => {
         <ProjectSummary
           id="project-5"
           sectionRef={projectFive}
-          visible={visibleSections.includes(projectThree.current)}
-          index={3}
+          visible={visibleSections.includes(projectFive.current)}
+          index={5}
           title="Linux C Shell"
           description="A linux based shell implemented in C. Implemented system calls including but not limited to ls, cd, echo, jobs, pinfo. Has advanced features such as input/output redirection, piping and signal handling."
           buttonText="View project"
@@ -166,8 +193,8 @@ export const Home = () => {
         <ProjectSummary
           id="project-6"
           sectionRef={projectSix}
-          visible={visibleSections.includes(projectThree.current)}
-          index={3}
+          visible={visibleSections.includes(projectSix.current)}
+          index={6}
           title="2D Clash-of-Clans"
           description="An interactive terminal based game implemented using Python."
           buttonText="View project"
@@ -178,8 +205,8 @@ export const Home = () => {
         <ProjectSummary
           id="project-7"
           sectionRef={projectSeven}
-          visible={visibleSections.includes(projectThree.current)}
-          index={3}
+          visible={visibleSections.includes(projectSeven.current)}
+          index={7}
           title="Food Ordering Portal"
           description="A responsive WebApp developed using MERN to help manage and order food."
           buttonText="View project"
@@ -190,8 +217,8 @@ export const Home = () => {
         <ProjectSummary
           id="project-8"
           sectionRef={projectEight}
-          visible={visibleSections.includes(projectThree.current)}
-          index={3}
+          visible={visibleSections.includes(projectEight.current)}
+          index={8}
           title="Python-MySQL based DBMS"
           description="An interactive Python3 CLI that allows users to make changes in the database using functions such as but not limited to create, update, delete, modify and retrieve."
           buttonText="View project"
