@@ -10,6 +10,7 @@
   max-width: 1024px;
   width: 100%;
   position: relative;
+  z-index: 1;
   top: calc(var(--spaceL) * -1);
 
   @media (--mediaDesktop) {

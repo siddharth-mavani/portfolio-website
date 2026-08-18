@@ -17,29 +17,33 @@ const mailtoURL = `mailto:siddharthamavani2003@gmail.com?subject=${""}&body=${"H
 const ProfileText = ({ visible, titleId }) => (
   <Fragment>
     <Heading className={styles.title} data-visible={visible} level={3} id={titleId}>
-      <DecoderText text="Hi there" start={visible} delay={500} />
+      <DecoderText text="Hi there 👋" start={visible} delay={500} />
     </Heading>
     
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      I'm Siddharth Mavani! I recently graduated with a B.Tech in Computer Science and Engineering 
-      from the <Link href="https://www.iiit.ac.in/">International Institute of Information Technology, Hyderabad. </Link> 
-      During my time there, my passion for programming and solving challenging problems grew immensely.
+      I’m Siddharth Mavani, a Member of Technical Staff at <Link href="https://www.oracle.com/">Oracle</Link>,
+      where I build backend and distributed systems for <Link href="https://www.oracle.com/in/cloud/">Oracle Cloud Infrastructure (OCI)</Link>.
+      I like taking on tricky reliability and scale problems and turning them into secure, observable services.
     </Text>
     
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      I currently work as a Member of Technical Staff at <Link href="https://www.oracle.com/">Oracle </Link>
-      as part of <Link href="https://www.oracle.com/in/cloud/"> Oracle Cloud Infrastructure (OCI) </Link>
-      team. I have a diverse skill set having worked on full-stack, ML/AI as well as DevOps 
-      projects. The prospect of using my abilities to positively impact many lives is what 
-      fuels my passion for computer science and keeps me motivated.
+      Lately, that has meant productionizing zero-trust controls, building health-check systems that spot failures
+      quickly and improve availability at scale, and developing AI-assisted automation and reusable agent skills that
+      help engineers respond to critical incidents. I enjoy carrying an idea all the way from design to production—
+      making it observable, automating the tedious bits, and building confidence with solid tests.
     </Text>
     
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-    When I'm not coding, you can find me on the football pitch, passionately cheering for Real Madrid, or on the cricket field. I’m also trying to balance my love for sports with a newfound commitment to the gym—after all, even programmers need to work on their health and physique!
+      Away from the day job, I like building projects that I think are cool and fun. Recent projects include OrbitKV, a Dynamo-inspired
+      distributed key-value store that explores quorums, vector clocks, tombstones, and read repair; and Aurelia
+      Ledger, a Go/PostgreSQL double-entry ledger focused on immutable records, transactional correctness, and
+      concurrency-safe financial workflows.
     </Text>
     
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-    So, whether it’s crafting elegant code or discussing the latest match, I’m all about making a difference—one line of code (or goal) at a time!
+      When I’m not coding, you’ll usually find me following Real Madrid, playing or
+      watching cricket, or trying to stay consistent at the gym. I also love getting out of the city—whether that
+      means planning a trip somewhere new or spending a weekend trekking and chasing a good view.
     </Text>
   </Fragment>
 );
