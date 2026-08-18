@@ -1,0 +1,144 @@
+.experience {
+  width: 100%;
+  min-height: auto;
+  display: flex;
+  align-items: center;
+  padding-top: clamp(var(--space3XL), 8vw, var(--space4XL));
+  padding-bottom: clamp(var(--space3XL), 8vw, var(--space4XL));
+}
+
+.content {
+  width: 100%;
+  max-width: var(--maxWidthL);
+  margin: 0 auto;
+}
+
+.divider {
+  width: 64px;
+  margin-bottom: var(--spaceXL);
+  opacity: 0;
+  transition: opacity var(--durationM) ease;
+
+  &[data-visible='true'] {
+    opacity: 1;
+  }
+}
+
+.title,
+.timeline {
+  opacity: 0;
+  transition: opacity var(--durationXL) ease var(--durationM);
+
+  @media (--mediaUseMotion) {
+    transition-property: opacity, transform;
+    transform: translate3d(0, var(--spaceL), 0);
+  }
+
+  &[data-visible='true'] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.title {
+  margin-bottom: var(--spaceXL);
+}
+
+.timeline {
+  display: grid;
+  gap: var(--space3XL);
+}
+
+.role {
+  position: relative;
+  border-left: 2px solid rgb(var(--rgbPrimary));
+  padding-left: clamp(var(--spaceL), 3vw, var(--space2XL));
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: -7px;
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgb(var(--rgbBackground));
+    border-radius: 50%;
+    background: rgb(var(--rgbPrimary));
+  }
+}
+
+.roleHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--spaceL);
+  align-items: start;
+}
+
+.companyLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spaceS);
+}
+
+.company {
+  color: rgb(var(--rgbPrimary));
+}
+
+.roleTitle {
+  margin-bottom: var(--spaceS);
+  overflow-wrap: anywhere;
+}
+
+.period {
+  color: rgb(var(--rgbPrimary));
+  text-align: right;
+  white-space: nowrap;
+}
+
+.separator {
+  color: var(--colorTextLight);
+}
+
+.location {
+  margin-top: var(--spaceS);
+}
+
+.highlights {
+  display: grid;
+  gap: var(--spaceM);
+  margin-top: var(--spaceM);
+  padding-left: 1.25em;
+
+  & li {
+    padding-left: var(--spaceS);
+  }
+
+  & li::marker {
+    color: rgb(var(--rgbPrimary));
+  }
+}
+
+@media (--mediaTablet) {
+  .roleHeader {
+    grid-template-columns: 1fr;
+    gap: var(--spaceS);
+  }
+
+  .period {
+    grid-row: 1;
+    text-align: left;
+    white-space: normal;
+  }
+}
+
+@media (--mediaMobile) {
+  .timeline {
+    gap: var(--space2XL);
+  }
+
+  .highlights {
+    gap: var(--spaceS);
+    padding-left: var(--spaceL);
+  }
+}

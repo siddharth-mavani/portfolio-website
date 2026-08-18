@@ -1,20 +1,8 @@
-import gamestackTexture2Placeholder from 'assets/gamestack-list-placeholder.jpg';
-
-import gamestackTexturePlaceholder from 'assets/gamestack-login-placeholder.jpg';
-
-import sliceTexturePlaceholder from 'assets/slice-app-placeholder.jpg';
-
-import sprTexturePlaceholder from 'assets/spr-lesson-builder-dark-placeholder.jpg';
-
-import hmsPreview from 'assets/hms-preview.png';
-import cicd from 'assets/cicd.png';
-import algoVE from 'assets/algo-ve-preview.png';
-import blockchain from 'assets/blockchain.png';
-import algoVE2 from 'assets/algoVE2.png';
-import stockDash from 'assets/stock-dashboard.png';
-import stockDash2 from 'assets/stockDash2.png';
-import { Footer } from 'components/Footer';
+import { Heading } from 'components/Heading';
 import { Meta } from 'components/Meta';
+import { Section } from 'components/Section';
+import { Text } from 'components/Text';
+import { Experience } from 'layouts/Home/Experience';
 import { Intro } from 'layouts/Home/Intro';
 import { Profile } from 'layouts/Home/Profile';
 import { ProjectSummary } from 'layouts/Home/ProjectSummary';
@@ -23,24 +11,66 @@ import styles from './Home.module.css';
 
 const disciplines = ['Student', 'Learner'];
 
+const projects = [
+  {
+    title: 'OrbitKV',
+    subtitle: 'A Distributed Key-Value Store',
+    description:
+      'A leaderless Dynamo-style key-value store in Python with a configurable 32-bit consistent-hash ring, N/R/W quorum coordination, and Protocol Buffers/gRPC replica communication. Vector clocks preserve concurrent writes as sibling versions, while tombstones and read repair support eventual consistency across a real three-node REST/gRPC cluster validated by a 36-test unit and integration suite.',
+    tags: ['Python', 'Distributed systems', 'gRPC'],
+    buttonLink: 'https://github.com/siddharth-mavani/Orbit-KV',
+    featured: true,
+  },
+  {
+    title: 'Aurelia Ledger',
+    subtitle: 'Double-Entry Token Accounting Service',
+    description:
+      'A Go/PostgreSQL double-entry ledger service with an immutable journal, database-enforced balancing, rebuildable projections, reconciliation, and paginated history. Concurrency-safe deposit, spend, adjustment, and reservation workflows use atomic transactions, deterministic row locking, scoped idempotency keys, and overdraft protection, backed by a 30-test domain, HTTP, and PostgreSQL integration suite.',
+    tags: ['Go', 'PostgreSQL', 'REST APIs'],
+    buttonLink: 'https://github.com/siddharth-mavani/Aurelia-Ledger',
+    featured: true,
+  },
+  {
+    title: 'LoCoML',
+    subtitle: 'A Low-Code Machine Learning Platform',
+    description:
+      'A low-code machine-learning platform for streamlined model training and analysis, with model versioning, data preprocessing, and automated machine learning workflows.',
+    tags: ['Machine learning', 'AutoML', 'Low-code'],
+    buttonLink: 'https://github.com/siddharth-mavani/LoCoML/',
+  },
+  {
+    title: 'CineStream',
+    subtitle: 'A Video Streaming Platform',
+    description:
+      'A microservice-based video streaming platform with flexible subscriptions, personalized recommendations, and a workflow for requesting new movies.',
+    tags: ['Microservices', 'Streaming', 'Full stack'],
+    buttonLink: 'https://github.com/siddharth-mavani/video-streaming-microservices',
+  },
+  {
+    title: 'Linux C Shell',
+    subtitle: 'A Unix-Style Command-Line Shell',
+    description:
+      'A Linux shell implemented in C with built-in commands, job control, process information, input/output redirection, pipelines, and signal handling.',
+    tags: ['C', 'Linux', 'Systems programming'],
+    buttonLink: 'https://github.com/siddharth-mavani/Linux-C-Shell',
+  },
+];
+
 export const Home = () => {
   const [visibleSections, setVisibleSections] = useState([]);
   const [scrollIndicatorHidden, setScrollIndicatorHidden] = useState(false);
   const intro = useRef();
+  const details = useRef();
+  const experience = useRef();
   const projectOne = useRef();
   const projectTwo = useRef();
   const projectThree = useRef();
   const projectFour = useRef();
   const projectFive = useRef();
-  const projectSix = useRef();
-  const projectSeven = useRef();
-  const projectEight = useRef();
-  const projectNine = useRef();
-  const projectTen = useRef();
-  const details = useRef();
+  const projectRefs = [projectOne, projectTwo, projectThree, projectFour, projectFive];
 
   useEffect(() => {
-    const sections = [intro, projectOne, projectTwo, projectThree, projectFour,  projectFive, projectSix, projectSeven, projectEight, projectNine, projectTen, details];
+    const sections = [intro, details, experience, ...projectRefs];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -64,10 +94,10 @@ export const Home = () => {
     );
 
     sections.forEach(section => {
-      sectionObserver.observe(section.current);
+      if (section.current) sectionObserver.observe(section.current);
     });
 
-    indicatorObserver.observe(intro.current);
+    if (intro.current) indicatorObserver.observe(intro.current);
 
     return () => {
       sectionObserver.disconnect();
@@ -94,139 +124,47 @@ export const Home = () => {
         id="details"
       />
 
+      <Experience
+        sectionRef={experience}
+        visible={visibleSections.includes(experience.current)}
+        id="experience"
+      />
 
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-          alignItems:'center'
-        }}
+      <Section
+        as="section"
+        className={styles.projects}
+        id="projects"
+        aria-labelledby="projects-title"
       >
-        <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '200px', textAlign:'center'}}>
-        <ProjectSummary
-          id="project-10"
-          sectionRef={projectTen}
-          visible={visibleSections.includes(projectTen.current)}
-          index={10}
-          title="Part-of-Speech (PoS) Tagger"
-          description="A Bidirectional Long Short-Term Memory (Bi-LSTM) model to label each word in a sentence with its corresponding part of speech, such as noun, verb, etc."
-          buttonText="View project"
-          buttonLink="https://github.com/siddharth-mavani/PoS-Tagger"
-        />
-      </div>
-      <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '200px', textAlign:'center'}}>
-        <ProjectSummary
-          id="project-9"
-          sectionRef={projectNine}
-          visible={visibleSections.includes(projectNine.current)}
-          index={9}
-          title="Language Translation Model"
-          description="A sequence-to-sequence language translation model that translates sentences from Hungarian to English"
-          buttonText="View project"
-          buttonLink="https://github.com/siddharth-mavani/Python-Database-Management-System"
-        />
-      </div>
+        <header className={styles.projectsHeader}>
+          <Heading as="h2" className={styles.projectsTitle} id="projects-title" level={2}>
+            Projects
+          </Heading>
+          <Text as="p" className={styles.projectsIntro} size="l">
+            A focused selection of work across distributed systems, backend engineering,
+            machine learning, and systems programming.
+          </Text>
+        </header>
 
-        <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '200px', textAlign:'center' }}>
-          <ProjectSummary
-            id="project-1"
-            sectionRef={projectOne}
-            visible={visibleSections.includes(projectOne.current)}
-            index={1}
-            title="LoCoML"
-            description="A low-code ML platform enabling easy model training and analysis. Has several features including model versioning, data preprocessing, and automated machine learning (AutoML)."
-            buttonText="View project"
-            buttonLink="https://github.com/siddharth-mavani/LoCoML/"
-          />
-      </div>
-      <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '200px', textAlign:'center' }}>
-        <ProjectSummary
-          id="project-2"
-          alternate
-          sectionRef={projectTwo}
-          visible={visibleSections.includes(projectTwo.current)}
-          index={2}
-          title="CineStream: A Video Streaming Platform"
-          description="A Microservice architecture based video streaming platform offering a flexible subscription model, personalized recommendations, and the ability to request movies."
-          buttonText="View Project"
-          buttonLink="https://github.com/siddharth-mavani/video-streaming-microservices"
-        />
-      </div>
-      <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '200px', textAlign:'center'}}>
-        <ProjectSummary
-          id="project-3"
-          sectionRef={projectThree}
-          visible={visibleSections.includes(projectThree.current)}
-          index={3}
-          title="Kubernetes Multi-App"
-          description="An application containerised using Docker and deployed on a Kubernetes Cluster."
-          buttonText="View project"
-          buttonLink="https://github.com/siddharth-mavani/multi-k8s"
-        />
-      </div>
-      <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '200px', textAlign:'center'}}>
-        <ProjectSummary
-          id="project-4"
-          sectionRef={projectFour}
-          visible={visibleSections.includes(projectFour.current)}
-          index={4}
-          title="Multi-Dock"
-          description="A Multi-Container application with React for the frontend, Node/Express.js for the backend, Postgres for the database, and Redis for caching."
-          buttonText="View project"
-          buttonLink="https://github.com/siddharth-mavani/Multi-Docker"
-        />
-      </div>
-      <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '200px', textAlign:'center'}}>
-        <ProjectSummary
-          id="project-5"
-          sectionRef={projectFive}
-          visible={visibleSections.includes(projectFive.current)}
-          index={5}
-          title="Linux C Shell"
-          description="A linux based shell implemented in C. Implemented system calls including but not limited to ls, cd, echo, jobs, pinfo. Has advanced features such as input/output redirection, piping and signal handling."
-          buttonText="View project"
-          buttonLink="https://github.com/siddharth-mavani/Linux-C-Shell"
-        />
-      </div>
-      <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '200px', textAlign:'center'}}>
-        <ProjectSummary
-          id="project-6"
-          sectionRef={projectSix}
-          visible={visibleSections.includes(projectSix.current)}
-          index={6}
-          title="2D Clash-of-Clans"
-          description="An interactive terminal based game implemented using Python."
-          buttonText="View project"
-          buttonLink="https://github.com/siddharth-mavani/2D-Clash-of-Clans"
-        />
-      </div>
-      <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '200px', textAlign:'center'}}>
-        <ProjectSummary
-          id="project-7"
-          sectionRef={projectSeven}
-          visible={visibleSections.includes(projectSeven.current)}
-          index={7}
-          title="Food Ordering Portal"
-          description="A responsive WebApp developed using MERN to help manage and order food."
-          buttonText="View project"
-          buttonLink="https://github.com/siddharth-mavani/Food-Ordering-Portal"
-        />
-      </div>
-      <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '200px', textAlign:'center'}}>
-        <ProjectSummary
-          id="project-8"
-          sectionRef={projectEight}
-          visible={visibleSections.includes(projectEight.current)}
-          index={8}
-          title="Python-MySQL based DBMS"
-          description="An interactive Python3 CLI that allows users to make changes in the database using functions such as but not limited to create, update, delete, modify and retrieve."
-          buttonText="View project"
-          buttonLink="https://github.com/siddharth-mavani/Python-Database-Management-System"
-        />
-      </div>
-
-      </div>
+        <div className={styles.projectGrid}>
+          {projects.map((project, index) => (
+            <div
+              className={styles.project}
+              data-featured={project.featured || undefined}
+              key={project.title}
+            >
+              <ProjectSummary
+                {...project}
+                id={`project-${index + 1}`}
+                index={index + 1}
+                sectionRef={projectRefs[index]}
+                visible={visibleSections.includes(projectRefs[index].current)}
+                buttonText="View project"
+              />
+            </div>
+          ))}
+        </div>
+      </Section>
     </div>
   );
 };
