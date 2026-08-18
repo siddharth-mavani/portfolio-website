@@ -7,6 +7,8 @@ uniform float shininess;
 uniform float opacity;
 
 uniform float time;
+uniform vec3 baseColor;
+uniform vec3 highlightColor;
 varying vec2 vUv;
 varying vec3 newPosition;
 varying float noise;
@@ -41,11 +43,8 @@ varying float noise;
 void main() {
 	#include <clipping_planes_fragment>
 
-  vec3 color = vec3(vUv * (0.2 - 2.0 * noise), 1.0);
-  // vec3 finalColors = vec3(color.b * 1.5, color.r, color.r);
-  vec3 finalColors = vec3(color.b * 1.5, color.g * 1.5, color.g * 1.0);
-  // vec3 finalColors = vec3(0.255, 0.99, 0.255);
-  vec4 diffuseColor = vec4(cos(finalColors * noise * 3.5), 1.0);
+  float colorMix = smoothstep(-0.2, 0.7, noise + (vUv.x - 0.5) * 0.15);
+  vec4 diffuseColor = vec4(mix(baseColor, highlightColor, colorMix), 1.0);
   ReflectedLight reflectedLight = ReflectedLight(vec3(0.0), vec3(0.0), vec3(0.0), vec3(0.0));
   vec3 totalEmissiveRadiance = emissive;
 

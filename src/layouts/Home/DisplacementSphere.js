@@ -11,6 +11,7 @@ import {
   MeshPhongMaterial,
   PerspectiveCamera,
   Scene,
+  SRGBColorSpace,
   SphereGeometry,
   UniformsUtils,
   Vector2,
@@ -29,6 +30,8 @@ const springConfig = {
   damping: 2,
   mass: 1,
 };
+
+const createColor = rgb => new Color().setRGB(...rgbToThreeColor(rgb), SRGBColorSpace);
 
 export const DisplacementSphere = props => {
   const theme = useTheme();
@@ -69,10 +72,15 @@ export const DisplacementSphere = props => {
     scene.current = new Scene();
 
     material.current = new MeshPhongMaterial();
+    material.current.userData.baseColor = createColor(theme.rgbGraphicBase);
+    material.current.userData.highlightColor = createColor(theme.rgbGraphicHighlight);
+    material.current.shininess = 10;
     material.current.onBeforeCompile = shader => {
       uniforms.current = UniformsUtils.merge([
         shader.uniforms,
         { time: { type: 'f', value: 0 } },
+        { baseColor: { value: material.current.userData.baseColor } },
+        { highlightColor: { value: material.current.userData.highlightColor } },
       ]);
 
       shader.uniforms = uniforms.current;
@@ -95,8 +103,25 @@ export const DisplacementSphere = props => {
   }, []);
 
   useEffect(() => {
-    const dirLight = new DirectionalLight(0xffffff, theme === 'light' ? 0.8 : 0.55);
-    const ambientLight = new AmbientLight(0xffffff, theme === 'light' ? 2.7 : 0.55);
+    const isLightTheme = theme.themeId === 'light';
+    const baseColor = createColor(theme.rgbGraphicBase);
+    const highlightColor = createColor(theme.rgbGraphicHighlight);
+
+    if (material.current) {
+      material.current.userData.baseColor = baseColor;
+      material.current.userData.highlightColor = highlightColor;
+    }
+
+    if (uniforms.current) {
+      uniforms.current.baseColor.value.copy(baseColor);
+      uniforms.current.highlightColor.value.copy(highlightColor);
+    }
+
+    const dirLight = new DirectionalLight(
+      isLightTheme ? 0x3e8278 : 0xffffff,
+      isLightTheme ? 0.6 : 0.7
+    );
+    const ambientLight = new AmbientLight(0xffffff, isLightTheme ? 0.9 : 1.1);
 
     dirLight.position.z = 350;
     dirLight.position.x = 10;
